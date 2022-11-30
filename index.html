@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GW3ZEGCB59"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-GW3ZEGCB59');
+</script>
+<title>Schedual</title>
+<meta name=viewport content="width=device-width, initial-scale=1, user-scalable=yes">
+<style>
+@font-face { font-family: Nolluqa; src: url('NolluqaRegular.otf'); } 
+.wavy {
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: red;
+  text-decoration-thickness: 2px;
+}
+
+.item-icon {
+    font-size: 30pt;
+    color: white;
+}
+
+.item-text {
+    font-size: 18pt;
+    font-family: Sans-Serif;
+}
+
+a:link {
+    color: #0060df;
+}
+
+a:active {
+    color: #ff0000;
+}
+
+a:visited {
+    color: #551a8b;
+}
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script>
+
+async function versionInfo() {
+    const responses = await Promise.all([fetch('https://api.github.com/repos/schedual/schedual.github.io/commits?path=schedual.apk'),
+                 fetch('https://schedual.github.io/version.txt')])
+    
+    const [commit_data, version] = await Promise.all(responses.map((response) => response.json()))
+    var d = new Date(Date.parse(commit_data?.[0]?.commit?.committer?.date));
+    if (d) {
+        document.getElementById('android_link').textContent = `Download apk ${version} (${d.toLocaleDateString('en-GB')})`
+    }
+}
+
+function init() {
+    document.getElementById('android_link').addEventListener('click', function () {
+        gtag('event', 'download', {
+          type: 'android'
+        });
+        return true;
+    }, false);
+    
+    //android
+    
+    versionInfo()
+}
+
+window.onload = init
+</script>
+</head>
+<body style="background-color: #3e3e3e">
+<div style="font-family: Nolluqa; font-size: 70pt; color: white; text-align: center" class="wavy">Schedual</div>
+<table cellspacing="10" style="margin: auto; padding: 20px">
+    <tr>
+        <td style="text-align: center;">
+            <i class="fa-brands fa-android item-icon"></i>
+        </td>
+        <td>
+            <a href="schedual.apk" class="item-text" id="android_link">Download apk</a>
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">
+            <i class="fa-brands fa-apple item-icon"></i>
+        </td>
+        <td>
+            <a class="item-text">Coming soon...</a>
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">
+            <i class="fa-solid fa-book item-icon"></i>
+        </td>
+        <td>
+            <a class="item-text">Coming soon...</a>
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">
+            <i class="fa-solid fa-envelope item-icon"></i>
+        </td>
+        <td>
+            <a href="mailto:schedualapp@gmail.com" class="item-text">schedualapp@gmail.com</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
