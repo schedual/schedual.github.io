@@ -49,7 +49,7 @@ a:visited {
 
 async function versionInfo() {
     const responses = await Promise.all([fetch('https://api.github.com/repos/schedual/schedual.github.io/commits?path=schedual.apk'),
-                 fetch('https://schedual.github.io/version.txt')])
+                 fetch('https://schedual.github.io/version.txt', {cache: 'no-cache'})])
     
     const [commit_data, version] = await Promise.all(responses.map((response) => response.json()))
     var d = new Date(Date.parse(commit_data?.[0]?.commit?.committer?.date));
